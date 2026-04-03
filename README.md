@@ -17,7 +17,7 @@
 
 ## 📍 Sobre o Repositório
 
-O foco aqui é o **Java Core**. Os desafios contidos neste repositório foram projetados para simular problemas reais de backend, onde a precisão matemática e o tratamento de erros são mais importantes que a estética visual. Cada módulo explora um conceito específico: desde a validação geométrica até a gestão direta de índices em arrays.
+O foco aqui é o **Java Core**. Os desafios contidos neste repositório foram projetados para simular problemas reais de backend, onde a precisão matemática e o tratamento de erros são mais importantes que a estética visual. Cada módulo explora um conceito específico: desde a validação geométrica até a arquitetura modular com alocação dinâmica.
 
 ---
 
@@ -30,8 +30,11 @@ O foco aqui é o **Java Core**. Os desafios contidos neste repositório foram pr
 ├── 02-vector-manipulator/     # Gestão de Arrays e Memória
 │   └── src/
 │       └── VectorChange.java  # Manipulação de índices e Buffer
-├── .gitignore                 # Filtro de arquivos binários e IDE
-└── README.md                  # Documentação técnica
+├── 03-dynamic-performance-analyzer/ # Arquitetura Modular e Estatística
+│   └── src/
+│       └── DynamicPerformanceAnalyzer.java 
+├── .gitignore                       # Filtro de arquivos binários e IDE
+└── README.md                        # Documentação técnica
 ```
 
 ---
@@ -40,23 +43,20 @@ O foco aqui é o **Java Core**. Os desafios contidos neste repositório foram pr
 
 Neste repositório, priorizo práticas que garantem a estabilidade do software em ambiente de produção:
 
-### 🛡️ Programação Defensiva (`try-catch`)
+### 🛡️ Programação Defensiva e Validação Proativa
 
-Utilizo blocos de tratamento de exceção para evitar que o programa encerre abruptamente caso o usuário insira caracteres em vez de números.
+Além do uso de `try-catch` para capturar falhas críticas de entrada, o projeto implementa **validações proativas** para garantir que o estado da memória (como o tamanho de um array) seja sempre válido antes da execução.
 
 ```java
-try {
-    int posicao = sc.nextInt();
-    // processamento...
-} catch (InputMismatchException e) {
-    System.out.println("ERRO! Digite apenas números inteiros.");
-    sc.next(); // Limpeza de rastro no buffer
+if (qtd <= 0) {
+    System.out.println("ERRO! A quantidade deve ser maior que zero!");
+    continue; // Prevenção de NegativeArraySizeException
 }
 ```
 
-### 🧹 Gestão de Buffer do Scanner
+### 🧩 Arquitetura Modular (SoC)
 
-Implementação de limpezas estratégicas de buffer (`sc.nextLine()`) para permitir a transição suave entre a leitura de dados numéricos e textuais, evitando o erro comum de "pular" entradas do usuário.
+Aplicação do princípio de **Separação de Preocupações**. O código é dividido em métodos estáticos especializados, facilitando a manutenção e os testes unitários. O `main` atua exclusivamente como um orquestrador de alto nível.
 
 ---
 
@@ -68,15 +68,18 @@ Um motor de regras que utiliza vetores para armazenar dimensões e aplica o teor
 **2. Vector Manipulator:**
 Um laboratório de manipulação de memória que permite alterar estados específicos de um array, traduzindo a lógica humana (1-5) para a lógica computacional (0-4) de forma transparente.
 
+**3. Dynamic Performance Analyzer:**
+Sistema de análise estatística que utiliza **alocação dinâmica de memória** baseada no input do usuário. Implementa métodos independentes para cálculo de média, identificação de extremos (maior/menor nota) e geração de relatórios formatados.
+
 ---
 
 ## 🔜 Próximos Passos
 
 A evolução deste repositório seguirá o cronograma de especialização Backend:
 
-1. **Analisador de Notas:** Implementação de alocação dinâmica de memória baseada no input do usuário.
-2. **Introdução à POO:** Refatoração dos desafios atuais para o paradigma de Orientação a Objetos (Classes e Métodos).
-3. **Persistência:** Integração futura com JDBC para salvar estados em bancos de dados SQL.
+1.  **Migração para POO:** Refatoração do Analisador de Notas para o paradigma de **Orientação a Objetos**, utilizando Classes, Atributos, Encapsulamento e Métodos de Instância.
+2.  **Gestão de Coleções:** Evolução do uso de Arrays fixos para `ArrayList` e outras estruturas da Java Collections API.
+3.  **Persistência:** Integração futura com JDBC para salvar estados em bancos de dados SQL.
 
 ---
 
